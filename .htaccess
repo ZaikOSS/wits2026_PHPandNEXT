@@ -1,0 +1,23 @@
+# Enable Rewrite Engine
+RewriteEngine On
+
+# Set the base URL for rewriting
+# This should be the path from your web root to the directory containing this .htaccess file
+# In your case, it's /witsReact/
+RewriteBase /witsReact/
+
+# Rule to handle API requests
+# If the request is for /witsReact/api/anything
+# And it's not a real file or directory
+# Then rewrite it to api/index.php
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^api/(.*)$ api/index.php [QSA,L]
+
+# Optional: If you plan to serve your React app from the same /witsReact/ root
+# and use client-side routing, you'd add rules here for the React app.
+# For example:
+# RewriteCond %{REQUEST_FILENAME} !-f
+# RewriteCond %{REQUEST_FILENAME} !-d
+# RewriteCond %{REQUEST_URI} !^/witsReact/api/.*$ [NC] # Exclude API calls
+# RewriteRule . index.html [L]
