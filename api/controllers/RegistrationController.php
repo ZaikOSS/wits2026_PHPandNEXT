@@ -51,9 +51,15 @@ class RegistrationController {
         $data = json_decode(file_get_contents('php://input'), true);
 
         $status = $data['status'] ?? null;
-        if (empty($status)) {
-            sendErrorResponse('Missing required status for update.', 400);
+        
+        // --- START OF RECOMMENDED FIX ---
+        // Validate the incoming status against the allowed ENUM values
+        $allowed_statuses = ['pending', 'approved', 'rejected']; // These must exactly match your database ENUM values
+        if (empty($status) || !in_array($status, $allowed_statuses, true)) {
+            sendErrorResponse('Invalid or missing status provided. Allowed values are: ' . implode(', ', $allowed_statuses), 400);
+            return; // Stop execution if validation fails
         }
+        // --- END OF RECOMMENDED FIX ---
 
         if ($this->registrationModel->updateStatus($id, $status)) {
             sendJsonResponse(['message' => 'Registration status updated successfully.']);

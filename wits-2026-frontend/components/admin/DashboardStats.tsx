@@ -34,7 +34,14 @@ interface Stats {
   rejectedRegistrations: number;
 }
 
-export default function DashboardStats() {
+// Define props interface to accept onNavigateToTab function
+interface DashboardStatsProps {
+  onNavigateToTab: (tabValue: string) => void;
+}
+
+export default function DashboardStats({
+  onNavigateToTab,
+}: DashboardStatsProps) {
   const [stats, setStats] = useState<Stats>({
     totalSpeakers: 0,
     totalCommittees: 0,
@@ -238,26 +245,39 @@ export default function DashboardStats() {
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-            <div className="p-4 border rounded-lg hover:bg-gray-50 cursor-pointer transition-colors">
+            {/* Add onClick handlers to navigate to specific tabs */}
+            <div
+              className="p-4 border rounded-lg hover:bg-gray-50 cursor-pointer transition-colors"
+              onClick={() => onNavigateToTab("speakers")}
+            >
               <Mic className="h-8 w-8 text-blue-600 mb-2" />
               <h3 className="font-semibold">Add Speaker</h3>
               <p className="text-sm text-gray-600">Add new keynote speaker</p>
             </div>
-            <div className="p-4 border rounded-lg hover:bg-gray-50 cursor-pointer transition-colors">
+            <div
+              className="p-4 border rounded-lg hover:bg-gray-50 cursor-pointer transition-colors"
+              onClick={() => onNavigateToTab("committees")}
+            >
               <Users className="h-8 w-8 text-green-600 mb-2" />
               <h3 className="font-semibold">Add Committee Member</h3>
               <p className="text-sm text-gray-600">
                 Add organizing committee member
               </p>
             </div>
-            <div className="p-4 border rounded-lg hover:bg-gray-50 cursor-pointer transition-colors">
+            <div
+              className="p-4 border rounded-lg hover:bg-gray-50 cursor-pointer transition-colors"
+              onClick={() => onNavigateToTab("registrations")}
+            >
               <Clock className="h-8 w-8 text-yellow-600 mb-2" />
               <h3 className="font-semibold">Review Registrations</h3>
               <p className="text-sm text-gray-600">
                 Process pending registrations
               </p>
             </div>
-            <div className="p-4 border rounded-lg hover:bg-gray-50 cursor-pointer transition-colors">
+            <div
+              className="p-4 border rounded-lg hover:bg-gray-50 cursor-pointer transition-colors"
+              onClick={() => onNavigateToTab("contacts")}
+            >
               <MessageSquare className="h-8 w-8 text-orange-600 mb-2" />
               <h3 className="font-semibold">Check Messages</h3>
               <p className="text-sm text-gray-600">Review contact messages</p>

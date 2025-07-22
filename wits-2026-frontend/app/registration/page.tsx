@@ -296,6 +296,104 @@ export default function RegistrationPage() {
           </p>
         </div>
 
+        {/* Registration Information Section - MOVED TO TOP */}
+        <div className="bg-blue-50 p-4 rounded-lg mb-8">
+          {" "}
+          {/* Added mb-8 for spacing */}
+          <h3 className="font-semibold text-blue-900 mb-2">
+            Registration Information
+          </h3>
+          <h4 className="font-semibold text-blue-900 mb-2">
+            REGISTRATION FEES:
+          </h4>
+          <div className="overflow-x-auto mb-4">
+            <table className="min-w-full text-sm text-blue-800 border border-blue-200">
+              <thead>
+                <tr className="bg-blue-100">
+                  <th className="py-2 px-4 border-b border-blue-200 text-left">
+                    Participant
+                  </th>
+                  <th className="py-2 px-4 border-b border-blue-200 text-left">
+                    Before November 24th, 2026
+                  </th>
+                  <th className="py-2 px-4 border-b border-blue-200 text-left">
+                    After November 24th, 2026
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td className="py-2 px-4 border-b border-blue-200">
+                    Morocco Students
+                  </td>
+                  <td className="py-2 px-4 border-b border-blue-200">
+                    160 EURO
+                  </td>
+                  <td className="py-2 px-4 border-b border-blue-200">
+                    200 EURO
+                  </td>
+                </tr>
+                <tr>
+                  <td className="py-2 px-4 border-b border-blue-200">
+                    Academics
+                  </td>
+                  <td className="py-2 px-4 border-b border-blue-200">
+                    250 EURO
+                  </td>
+                  <td className="py-2 px-4 border-b border-blue-200">
+                    300 EURO
+                  </td>
+                </tr>
+                <tr>
+                  <td className="py-2 px-4 border-b border-blue-200">
+                    Other countries Students
+                  </td>
+                  <td className="py-2 px-4 border-b border-blue-200">
+                    250 EURO
+                  </td>
+                  <td className="py-2 px-4 border-b border-blue-200">
+                    300 EURO
+                  </td>
+                </tr>
+                <tr>
+                  <td className="py-2 px-4">Academics</td>
+                  <td className="py-2 px-4">300 EURO</td>
+                  <td className="py-2 px-4">350 EURO</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p className="text-sm text-blue-800 mb-2">
+            The standard page limit for each paper is 8 pages. Papers can exceed
+            this limit 8 “at a cost of 30 Euro extra per page”.
+          </p>
+          <h4 className="font-semibold text-blue-900 mt-4 mb-2">
+            Bank Details:
+          </h4>
+          <ul className="text-sm text-blue-800 space-y-1 mb-4">
+            <li>• Name of the bank: Banque Populaire</li>
+            <li>• Address: Agence AL AZHAR – FEZ – MOROCCO</li>
+            <li>• Account Number: MA 1272702111627249200009 94</li>
+            <li>• SWIFT: BCPOMAMC</li>
+            <li>
+              • Receiver: Association Nationale de recherche en Ingénierie des
+              Technologies Emergentes
+            </li>
+            <li>• Transfer Reason: WITS 2026 + Paper ID</li>
+          </ul>
+          <h4 className="font-semibold text-blue-900 mt-4 mb-2">
+            Registration Fee includes the following:
+          </h4>
+          <ul className="text-sm text-blue-800 space-y-1">
+            <li>• Admission to all technical sessions</li>
+            <li>• Volume of abstract and other handouts</li>
+            <li>• Lunches for 2 days</li>
+            <li>• Coffee breaks for 3 days</li>
+            <li>• Electronic conference proceedings</li>
+          </ul>
+        </div>
+
+        {/* Registration Form Section - MOVED BELOW INFO */}
         <Card>
           <CardHeader>
             <CardTitle>Registration Form</CardTitle>
@@ -318,9 +416,6 @@ export default function RegistrationPage() {
                     <SelectContent>
                       <SelectItem value="Dr">Dr</SelectItem>
                       <SelectItem value="Prof">Prof</SelectItem>
-                      <SelectItem value="Mr">Mr</SelectItem>
-                      <SelectItem value="Ms">Ms</SelectItem>
-                      <SelectItem value="Mrs">Mrs</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
@@ -533,18 +628,6 @@ export default function RegistrationPage() {
                   Please upload your payment receipt. This is required to
                   complete your registration.
                 </p>
-              </div>
-
-              <div className="bg-blue-50 p-4 rounded-lg">
-                <h3 className="font-semibold text-blue-900 mb-2">
-                  Registration Information
-                </h3>
-                <ul className="text-sm text-blue-800 space-y-1">
-                  <li>• Registration fee: $200 for regular participants</li>
-                  <li>• Student discount: $100 with valid student ID</li>
-                  <li>• Payment methods: Bank transfer or credit card</li>
-                  <li>• Your registration will be reviewed after submission</li>
-                </ul>
               </div>
 
               <Button

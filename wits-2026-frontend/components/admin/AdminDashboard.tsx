@@ -15,9 +15,17 @@ import CommitteesManager from "./CommitteesManager";
 import ContactsManager from "./ContactsManager";
 import RegistrationsManager from "./RegistrationsManager";
 import DashboardStats from "./DashboardStats";
+import { useState } from "react"; // Import useState
 
 export default function AdminDashboard() {
   const { adminUsername, logout } = useAuth();
+  // State to manage the active tab, initialized to 'overview'
+  const [activeTab, setActiveTab] = useState("overview");
+
+  // Function to handle tab changes, used by Tabs and passed to DashboardStats
+  const handleTabChange = (tabValue: string) => {
+    setActiveTab(tabValue);
+  };
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -41,7 +49,12 @@ export default function AdminDashboard() {
       </header>
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <Tabs defaultValue="overview" className="space-y-6">
+        {/* Pass activeTab and handleTabChange to Tabs component */}
+        <Tabs
+          value={activeTab}
+          onValueChange={handleTabChange}
+          className="space-y-6"
+        >
           <TabsList className="grid w-full grid-cols-5">
             <TabsTrigger value="overview" className="flex items-center gap-2">
               <BarChart3 className="h-4 w-4" />
@@ -69,7 +82,8 @@ export default function AdminDashboard() {
           </TabsList>
 
           <TabsContent value="overview">
-            <DashboardStats />
+            {/* Pass the handleTabChange function to DashboardStats */}
+            <DashboardStats onNavigateToTab={handleTabChange} />
           </TabsContent>
 
           <TabsContent value="speakers">
