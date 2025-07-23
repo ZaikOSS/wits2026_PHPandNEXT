@@ -10,6 +10,14 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog"; // Import Dialog components
+import { Button } from "@/components/ui/button"; // Import Button component
 import { speakersApi } from "@/lib/api";
 
 interface Speaker {
@@ -26,6 +34,11 @@ export default function SpeakersPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
+  // State for managing the bio dialog
+  const [selectedSpeakerForBio, setSelectedSpeakerForBio] =
+    useState<Speaker | null>(null);
+  const [isBioDialogOpen, setIsBioDialogOpen] = useState(false);
+
   useEffect(() => {
     fetchSpeakers();
   }, []);
@@ -40,6 +53,20 @@ export default function SpeakersPage() {
     } finally {
       setLoading(false);
     }
+  };
+
+  // Function to truncate text
+  const truncateText = (text: string, maxLength: number) => {
+    if (text.length <= maxLength) {
+      return text;
+    }
+    return text.substring(0, maxLength) + "...";
+  };
+
+  // Function to open the full bio dialog
+  const handleViewBio = (speaker: Speaker) => {
+    setSelectedSpeakerForBio(speaker);
+    setIsBioDialogOpen(true);
   };
 
   if (loading) {
@@ -122,9 +149,11 @@ export default function SpeakersPage() {
             {speakers.map((speaker) => (
               <Card
                 key={speaker.id}
-                className="overflow-hidden hover:shadow-lg transition-shadow"
+                className="overflow-hidden hover:shadow-lg transition-shadow flex flex-col" // Added flex-col for consistent height
               >
-                <div className="aspect-square relative">
+                <div className="aspect-square relative flex-shrink-0">
+                  {" "}
+                  {/* flex-shrink-0 to prevent image from shrinking */}
                   <img
                     src={
                       speaker.image
@@ -139,15 +168,32 @@ export default function SpeakersPage() {
                     }}
                   />
                 </div>
-                <CardHeader>
+                <CardHeader className="flex-grow-0">
+                  {" "}
+                  {/* flex-grow-0 to prevent header from growing */}
                   <CardTitle className="text-xl">{speaker.name}</CardTitle>
                   <CardDescription className="text-blue-600 font-medium">
                     {speaker.title}
                   </CardDescription>
                   <CardDescription>{speaker.institution}</CardDescription>
                 </CardHeader>
-                <CardContent>
-                  <p className="text-gray-600">{speaker.bio}</p>
+                <CardContent className="flex-grow flex flex-col justify-between">
+                  {" "}
+                  {/* flex-grow to make content fill remaining space */}
+                  <div>
+                    <p className="text-gray-600 text-sm mb-2">
+                      {truncateText(speaker.bio, 150)} {/* Truncate bio here */}
+                    </p>
+                    {speaker.bio.length > 150 && ( // Only show button if bio is long
+                      <Button
+                        variant="link"
+                        className="p-0 h-auto text-blue-600 hover:no-underline"
+                        onClick={() => handleViewBio(speaker)}
+                      >
+                        Read More
+                      </Button>
+                    )}
+                  </div>
                 </CardContent>
               </Card>
             ))}
@@ -156,6 +202,41 @@ export default function SpeakersPage() {
       </main>
 
       <Footer />
+
+      {/* Bio Details Dialog */}
+      <Dialog open={isBioDialogOpen} onOpenChange={setIsBioDialogOpen}>
+        <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto">
+          {selectedSpeakerForBio && (
+            <DialogHeader>
+              <DialogTitle className="text-2xl font-bold mb-2">
+                {selectedSpeakerForBio.name}
+              </DialogTitle>
+              <DialogDescription className="text-blue-600 font-medium text-lg">
+                {selectedSpeakerForBio.title}
+              </DialogDescription>
+              <DialogDescription className="text-gray-700 mb-4">
+                {selectedSpeakerForBio.institution}
+              </DialogDescription>
+              {selectedSpeakerForBio.image && (
+                <div className="w-32 h-32 mx-auto rounded-full overflow-hidden mb-4">
+                  <img
+                    src={`http://localhost/witsReact/${selectedSpeakerForBio.image}`}
+                    alt={selectedSpeakerForBio.name}
+                    className="w-full h-full object-cover"
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      target.src = "/placeholder.svg?height=300&width=300"; // Fallback image
+                    }}
+                  />
+                </div>
+              )}
+              <div className="text-gray-800 leading-relaxed whitespace-pre-wrap">
+                {selectedSpeakerForBio.bio}
+              </div>
+            </DialogHeader>
+          )}
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
