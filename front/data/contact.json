@@ -1,0 +1,36 @@
+ {
+    "contacts": [
+    {
+      "title": "General Information",
+      "name": "Pr: M. ALAMI MARKTANI",
+      "role": "Local Arrangements Chair",
+      "email": "info@wits2026.org",
+      "phone": "+212 (06) 51 71 26 04",
+      "icon": "Mail"
+    },
+    {
+      "title": "Program Committee",
+      "name": "Pr: H. CHOUGRAD",
+      "role": "Program Chair",
+      "email": "program@wits2026.org",
+      "phone": "+212 (0)5 35 60 04 03",
+      "icon": "Phone"
+    },
+    {
+      "title": "Registration & Payment",
+      "name": "Pr: S.D. BENNANI",
+      "role": "Registration Team",
+      "email": "registration@wits2026.org",
+      "phone": "+212 (0)5 35 60 03 86",
+      "icon": "MapPin"
+    },
+    {
+      "title": "Sponsorship Opportunities",
+      "name": "Pr: S.D. BENNANI",
+      "role": "General Chair",
+      "email": "sponsors@wits2026.org",
+      "phone": "+212 (0)5 35 60 03 86",
+      "icon": "Clock"
+    }
+    ]
+}

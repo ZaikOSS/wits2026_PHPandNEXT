@@ -1,0 +1,64 @@
+{
+  "title": "Submit Your Research",
+  "description": "Share your innovative research and join the global conversation on information technologies and systems",
+  "topics": [
+    "Artificial Intelligence and Machine Learning",
+    "Cybersecurity and Privacy",
+    "Big Data Analytics",
+    "Cloud Computing and Distributed Systems",
+    "Internet of Things (IoT)",
+    "Blockchain Technology",
+    "Human-Computer Interaction",
+    "Software Engineering",
+    "Database Systems",
+    "Network Technologies",
+    "Mobile Computing",
+    "Information Systems Management"
+  ],
+  "importantDates": [
+    {
+      "event": "Paper Submission Deadline",
+      "date": "March 15, 2026"
+    },
+    {
+      "event": "Notification of Acceptance",
+      "date": "May 1, 2026"
+    },
+    {
+      "event": "Camera-Ready Papers Due",
+      "date": "June 15, 2026"
+    },
+    {
+      "event": "Conference Dates",
+      "date": "August 20-22, 2026"
+    }
+  ],
+  "submissionGuidelines": {
+    "paperFormat": [
+      "Maximum 8 pages for full papers",
+      "Maximum 4 pages for short papers",
+      "IEEE conference format required",
+      "Anonymous submission for peer review"
+    ],
+    "reviewProcess": [
+      "Double-blind peer review",
+      "Minimum 3 reviewers per paper",
+      "Focus on originality and technical quality",
+      "Acceptance rate approximately 30%"
+    ]
+  },
+  "awards": [
+    {
+      "title": "Best Paper Award",
+      "description": "Outstanding research contributions will be recognized with the Best Paper Award, including a certificate and monetary prize."
+    },
+    {
+      "title": "Best Student Paper Award",
+      "description": "Exceptional work by student researchers will be honored with a special recognition award."
+    },
+    {
+      "title": "Publication Opportunities",
+      "description": "Selected papers will be invited for extended versions in special issues of top-tier journals."
+    }
+  ]
+}
