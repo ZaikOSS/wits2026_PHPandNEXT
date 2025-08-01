@@ -4,13 +4,22 @@ import { useState, useEffect } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Button } from "@/components/ui/button"; // Import Button for "Show More/Less"
 import { committeesApi } from "@/lib/api";
+import { ChevronDown, ChevronUp } from "lucide-react"; // Icons for expand/collapse
 
 interface Committee {
   id: string;
@@ -20,12 +29,20 @@ interface Committee {
   category: string;
 }
 
+// Define how many members to show initially per category
+const DISPLAY_LIMIT = 9;
+
 export default function CommitteesPage() {
   const [committees, setCommittees] = useState<Committee[]>([]);
   const [categories, setCategories] = useState<string[]>([]);
-  const [selectedCategory, setSelectedCategory] = useState<string>("All Categories");
+  const [selectedCategory, setSelectedCategory] =
+    useState<string>("All Categories");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  // State to keep track of which categories are expanded
+  const [expandedCategories, setExpandedCategories] = useState<Set<string>>(
+    new Set()
+  );
 
   useEffect(() => {
     fetchCommittees();
@@ -56,9 +73,25 @@ export default function CommitteesPage() {
   const handleCategoryChange = (category: string) => {
     setSelectedCategory(category);
     setLoading(true);
+    // Reset expanded categories when filter changes
+    setExpandedCategories(new Set());
     fetchCommittees(category === "All Categories" ? undefined : category);
   };
 
+  // Function to toggle the expanded state of a category
+  const toggleExpandCategory = (category: string) => {
+    setExpandedCategories((prev) => {
+      const newSet = new Set(prev);
+      if (newSet.has(category)) {
+        newSet.delete(category);
+      } else {
+        newSet.add(category);
+      }
+      return newSet;
+    });
+  };
+
+  // Group committees by category
   const groupedCommittees = committees.reduce((acc, committee) => {
     if (!acc[committee.category]) {
       acc[committee.category] = [];
@@ -79,6 +112,21 @@ export default function CommitteesPage() {
             <p className="text-xl text-gray-600">
               Loading committee information...
             </p>
+          </div>
+          {/* Add skeleton loading for committee cards */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[...Array(6)].map((_, i) => (
+              <Card key={i} className="animate-pulse">
+                <CardHeader>
+                  <div className="h-6 bg-gray-200 rounded mb-2"></div>
+                  <div className="h-4 bg-gray-200 rounded w-3/4"></div>
+                </CardHeader>
+                <CardContent>
+                  <div className="h-4 bg-gray-200 rounded w-full mb-1"></div>
+                  <div className="h-4 bg-gray-200 rounded w-5/6"></div>
+                </CardContent>
+              </Card>
+            ))}
           </div>
         </main>
         <Footer />
@@ -113,7 +161,8 @@ export default function CommitteesPage() {
             Conference Committees
           </h1>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Meet the dedicated professionals organizing WITS 2026 and ensuring its success.
+            Meet the dedicated professionals organizing WITS 2026 and ensuring
+            its success.
           </p>
         </div>
 
@@ -144,26 +193,63 @@ export default function CommitteesPage() {
           </div>
         ) : (
           <div className="space-y-12">
-            {Object.entries(groupedCommittees).map(([category, members]) => (
-              <section key={category}>
-                <h2 className="text-2xl font-bold text-gray-900 mb-4 text-center">
-                  {category}
-                </h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-y-2 gap-x-6">
-                  {members.map((member) => (
-                    <div
-                      key={member.id}
-                      className="text-base text-gray-800 leading-relaxed"
-                    >
-                      <span className="font-semibold uppercase">
-                        {member.name}
-                      </span>
-                      , {member.role}, {member.description}
+            {Object.entries(groupedCommittees).map(([category, members]) => {
+              const isExpanded = expandedCategories.has(category);
+              const displayedMembers = isExpanded
+                ? members
+                : members.slice(0, DISPLAY_LIMIT);
+              const needsExpansion = members.length > DISPLAY_LIMIT;
+
+              return (
+                <section key={category}>
+                  <h2 className="text-2xl font-bold text-gray-900 mb-6 text-center">
+                    {category}
+                  </h2>
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {displayedMembers.map((member) => (
+                      <Card
+                        key={member.id}
+                        className="hover:shadow-lg transition-shadow"
+                      >
+                        <CardHeader>
+                          <CardTitle className="text-lg">
+                            {member.name}
+                          </CardTitle>
+                          <CardDescription className="text-blue-600 font-medium">
+                            {member.role}
+                          </CardDescription>
+                        </CardHeader>
+                        <CardContent>
+                          <p className="text-gray-600 text-sm">
+                            {member.description}
+                          </p>
+                        </CardContent>
+                      </Card>
+                    ))}
+                  </div>
+                  {needsExpansion && (
+                    <div className="text-center mt-6">
+                      <Button
+                        variant="outline"
+                        onClick={() => toggleExpandCategory(category)}
+                      >
+                        {isExpanded ? (
+                          <>
+                            <ChevronUp className="h-4 w-4 mr-2" />
+                            Show Less
+                          </>
+                        ) : (
+                          <>
+                            <ChevronDown className="h-4 w-4 mr-2" />
+                            Show More ({members.length - DISPLAY_LIMIT} more)
+                          </>
+                        )}
+                      </Button>
                     </div>
-                  ))}
-                </div>
-              </section>
-            ))}
+                  )}
+                </section>
+              );
+            })}
           </div>
         )}
       </main>

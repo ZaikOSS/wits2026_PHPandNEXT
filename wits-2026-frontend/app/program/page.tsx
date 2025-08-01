@@ -175,7 +175,7 @@ export default function ProgramPage() {
         },
         {
           time: "13:30 - 15:00",
-          title: "Session 4A: Emerging Technologies",
+          title: "Session 4A: Embedded and Intelligent Systems.",
           type: "session",
           location: "Room A",
           description: "Next-generation wireless technologies",

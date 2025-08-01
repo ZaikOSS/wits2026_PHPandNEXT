@@ -1,39 +1,46 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import { Icon } from "@/components/icon-mapper"
-import Header from "@/components/Header"
-import Footer from "@/components/Footer"
-import { useToast } from "@/hooks/use-toast"
+import { useState } from "react";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+} from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Icon } from "@/components/icon-mapper";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+import { useToast } from "@/hooks/use-toast";
 
 export default function CallForPapersPage() {
-  const [loading, setLoading] = useState(false)
-  const { toast } = useToast()
+  const [loading, setLoading] = useState(false);
+  const { toast } = useToast();
 
   // Mock data - replace with your actual data fetching logic
   const data = {
     title: "Share Your Research with the World",
-    description: "We invite researchers and practitioners to submit papers on emerging topics in information systems and technology.",
+    description:
+      "We invite researchers and practitioners to submit papers on WIreless Technologies, embedded and Intelligent Systems.",
     submissionGuidelines: {
       paperFormat: [
         "Papers should be in English and not exceed 12 pages",
         "Use Springer LNCS format for submissions",
-        "Submissions must be original and not previously published"
+        "Submissions must be original and not previously published",
       ],
       reviewProcess: [
         "Double-blind peer review process",
         "Notification of acceptance within 4-6 weeks",
-        "Revised papers may be requested"
-      ]
+        "Revised papers may be requested",
+      ],
     },
     importantDates: [
       { event: "Abstract Submission Deadline", date: "January 15, 2025" },
       { event: "Full Paper Submission Deadline", date: "February 20, 2025" },
       { event: "Notification of Acceptance", date: "April 10, 2025" },
-      { event: "Camera-ready Submission", date: "May 15, 2025" }
+      { event: "Camera-ready Submission", date: "May 15, 2025" },
     ],
     topics: [
       "Artificial Intelligence in Business",
@@ -45,32 +52,37 @@ export default function CallForPapersPage() {
       "Human-Computer Interaction",
       "Information Security and Privacy",
       "Internet of Things",
-      "Social Media and Networks"
+      "Social Media and Networks",
     ],
     awards: [
       {
         title: "Best Paper Award",
-        description: "Recognizes the most outstanding paper in the conference as determined by the program committee."
+        description:
+          "Recognizes the most outstanding paper in the conference as determined by the program committee.",
       },
       {
         title: "Best Student Paper Award",
-        description: "Awarded to the best paper whose primary author is a student."
-      }
-    ]
-  }
+        description:
+          "Awarded to the best paper whose primary author is a student.",
+      },
+    ],
+  };
 
   const handleSubmitClick = () => {
-    setLoading(true)
+    setLoading(true);
     // Simulate submission process
     setTimeout(() => {
-      setLoading(false)
+      setLoading(false);
       toast({
         title: "Redirecting",
         description: "You are being redirected to the submission system.",
-      })
-      window.open("https://easychair.org/conferences/?conf=yourconference", "_blank")
-    }, 1000)
-  }
+      });
+      window.open(
+        "https://easychair.org/conferences/?conf=yourconference",
+        "_blank"
+      );
+    }, 1000);
+  };
 
   return (
     <div className="min-h-screen bg-white">
@@ -78,7 +90,9 @@ export default function CallForPapersPage() {
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">{data.title}</h1>
+          <h1 className="text-4xl font-bold text-gray-900 mb-4">
+            {data.title}
+          </h1>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
             {data.description}
           </p>
@@ -94,7 +108,9 @@ export default function CallForPapersPage() {
                 </div>
                 <div>
                   Submission Guidelines
-                  <CardDescription>Requirements and review process</CardDescription>
+                  <CardDescription>
+                    Requirements and review process
+                  </CardDescription>
                 </div>
               </CardTitle>
             </CardHeader>
@@ -113,12 +129,14 @@ export default function CallForPapersPage() {
               <div>
                 <h3 className="font-semibold text-lg mb-3">Review Process</h3>
                 <ul className="space-y-2">
-                  {data.submissionGuidelines.reviewProcess.map((item, index) => (
-                    <li key={index} className="flex items-start gap-3">
-                      <div className="w-1.5 h-1.5 bg-blue-500 rounded-full mt-2 flex-shrink-0" />
-                      <span className="text-gray-700">{item}</span>
-                    </li>
-                  ))}
+                  {data.submissionGuidelines.reviewProcess.map(
+                    (item, index) => (
+                      <li key={index} className="flex items-start gap-3">
+                        <div className="w-1.5 h-1.5 bg-blue-500 rounded-full mt-2 flex-shrink-0" />
+                        <span className="text-gray-700">{item}</span>
+                      </li>
+                    )
+                  )}
                 </ul>
               </div>
             </CardContent>
@@ -133,7 +151,9 @@ export default function CallForPapersPage() {
                 </div>
                 <div>
                   Important Dates
-                  <CardDescription>Submission deadlines and notifications</CardDescription>
+                  <CardDescription>
+                    Submission deadlines and notifications
+                  </CardDescription>
                 </div>
               </CardTitle>
             </CardHeader>
@@ -143,8 +163,12 @@ export default function CallForPapersPage() {
                   key={index}
                   className="flex justify-between items-center py-3 border-b border-gray-100 last:border-b-0"
                 >
-                  <span className="text-gray-700 font-medium">{item.event}</span>
-                  <span className="text-gray-900 font-semibold">{item.date}</span>
+                  <span className="text-gray-700 font-medium">
+                    {item.event}
+                  </span>
+                  <span className="text-gray-900 font-semibold">
+                    {item.date}
+                  </span>
                 </div>
               ))}
             </CardContent>
@@ -160,13 +184,16 @@ export default function CallForPapersPage() {
               </div>
               <div>
                 Research Topics
-                <CardDescription>Areas of interest for the conference</CardDescription>
+                <CardDescription>
+                  Areas of interest for the conference
+                </CardDescription>
               </div>
             </CardTitle>
           </CardHeader>
           <CardContent>
             <p className="text-gray-600 mb-6">
-              We welcome submissions on all aspects of information technologies and systems, including but not limited to:
+              We welcome submissions on all aspects of information technologies
+              and systems, including but not limited to:
             </p>
             <div className="grid md:grid-cols-2 gap-4">
               {data.topics.map((topic, index) => (
@@ -188,7 +215,9 @@ export default function CallForPapersPage() {
               </div>
               <div>
                 Awards & Recognition
-                <CardDescription>Prizes for outstanding contributions</CardDescription>
+                <CardDescription>
+                  Prizes for outstanding contributions
+                </CardDescription>
               </div>
             </CardTitle>
           </CardHeader>
@@ -219,5 +248,5 @@ export default function CallForPapersPage() {
 
       <Footer />
     </div>
-  )
+  );
 }

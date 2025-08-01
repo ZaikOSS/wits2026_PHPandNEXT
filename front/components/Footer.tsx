@@ -1,5 +1,5 @@
-import Link from "next/link"
-import { Mail, Phone, MapPin } from "lucide-react"
+import Link from "next/link";
+import { Mail, Phone, MapPin } from "lucide-react";
 
 export default function Footer() {
   return (
@@ -9,36 +9,54 @@ export default function Footer() {
           <div className="col-span-1 md:col-span-2">
             <h3 className="text-2xl font-bold mb-4">WITS 2026</h3>
             <p className="text-gray-300 mb-4">
-              International Conference on Wireless Technologies and Emerging Communication Systems
+              International Conference on WIreless Technologies, embedded and
+              Intelligent Systems.
             </p>
-            <p className="text-gray-300">Organized by USMBA - Université Sidi Mohamed Ben Abdellah</p>
+            <p className="text-gray-300">
+              Organized by USMBA - Université Sidi Mohamed Ben Abdellah
+            </p>
           </div>
 
           <div>
             <h4 className="text-lg font-semibold mb-4">Quick Links</h4>
             <ul className="space-y-2">
               <li>
-                <Link href="/speakers" className="text-gray-300 hover:text-white">
+                <Link
+                  href="/speakers"
+                  className="text-gray-300 hover:text-white"
+                >
                   Speakers
                 </Link>
               </li>
-               <li>
-                <Link href="/CallForPapers" className="text-gray-300 hover:text-white">
+              <li>
+                <Link
+                  href="/CallForPapers"
+                  className="text-gray-300 hover:text-white"
+                >
                   CallForPapers
                 </Link>
               </li>
               <li>
-                <Link href="/contact" className="text-gray-300 hover:text-white">
+                <Link
+                  href="/contact"
+                  className="text-gray-300 hover:text-white"
+                >
                   Contact
                 </Link>
               </li>
               <li>
-                <Link href="/program" className="text-gray-300 hover:text-white">
+                <Link
+                  href="/program"
+                  className="text-gray-300 hover:text-white"
+                >
                   Program
                 </Link>
               </li>
               <li>
-                <Link href="/registration" className="text-gray-300 hover:text-white">
+                <Link
+                  href="/registration"
+                  className="text-gray-300 hover:text-white"
+                >
                   Registration
                 </Link>
               </li>
@@ -70,9 +88,11 @@ export default function Footer() {
         </div>
 
         <div className="border-t border-gray-800 mt-8 pt-8 text-center">
-          <p className="text-gray-300">© 2026 WITS Conference. All rights reserved.</p>
+          <p className="text-gray-300">
+            © 2026 WITS Conference. All rights reserved.
+          </p>
         </div>
       </div>
     </footer>
-  )
+  );
 }

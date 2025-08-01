@@ -52,8 +52,8 @@ export default function HomePage() {
               WITS 2026
             </h1>
             <p className="text-xl md:text-2xl mb-4 text-gray-700 max-w-4xl mx-auto lg:mx-0">
-              International Conference on Wireless Technologies and Emerging
-              Communication Systems
+              International Conference on WIreless Technologies, embedded and
+              Intelligent Systems.
             </p>
             <p className="text-lg mb-10 text-gray-600 max-w-3xl mx-auto lg:mx-0">
               Join leading researchers and practitioners in exploring the future
@@ -222,8 +222,8 @@ export default function HomePage() {
             Ready to Join WITS 2026?
           </h2>
           <p className="text-xl md:text-2xl mb-10 max-w-2xl mx-auto opacity-90">
-            Don't miss this opportunity to be part of the premier conference on
-            wireless technologies and emerging communication systems.
+            Don't miss this opportunity to be part of the conference on WIreless
+            Technologies, embedded and Intelligent Systems.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/registration" passHref>
